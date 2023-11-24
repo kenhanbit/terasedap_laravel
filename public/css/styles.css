@@ -1,0 +1,397 @@
+@font-face {
+    font-family: "sfpro";
+    src: url("../fonts/sfpro.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "lemonmilk";
+    src: url("../fonts/lemonmilk.otf") format("truetype");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: lemonmilk;
+}
+
+body {
+    background-color: #232323;
+    color: #e9e9e9;
+}
+
+.logo img {
+    max-width: 200px;
+}
+
+.motto {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10vw;
+    margin-left: 5vw;
+    font-family: sfpro;
+    font-size: 36px;
+}
+
+.centered-list {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul.horizontal-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+}
+
+ul.horizontal-list li {
+    font-family: lemonmilk;
+    min-width: max-content;
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #565656;
+    margin: 8px;
+    border-radius: 50px;
+}
+
+ul.horizontal-list li:hover {
+    background-color: #969696;
+    color: #fb3c2c;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 24px;
+    margin-top: 0;
+    font-family: lemonmilk;
+}
+.list {
+    font-family: lemonmilk;
+    padding: 20px;
+    font-size: 3.5vw;
+}
+
+.menu {
+    padding: 12px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: 86%;
+    min-height: max-content;
+    margin-bottom: 12px;
+    transition: 100ms;
+}
+
+.menu-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-item:hover {
+    cursor: pointer;
+    .food-name {
+        color: #fb3c2c;
+    }
+}
+
+.container {
+    display: flex;
+}
+
+.container img {
+    max-width: 90%;
+}
+
+.image {
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+}
+.text {
+    flex: 1;
+    padding: 20px;
+    font-family: lemonmilk;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+/* Style for the food image */
+.menu-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+/* Style for the food name */
+.food-name {
+    color: #e9e9e9;
+    font-family: sfpro;
+    font-size: 21px;
+    text-decoration-line: none;
+}
+
+/* Style for the food price */
+.food-price {
+    color: #ff5733; /* You can choose your desired color */
+    font-family: lemonmilk;
+    font-size: 18px;
+    text-decoration-line: none;
+}
+
+.quantity-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+.quantity-buttons button {
+    background: #fb3c2c;
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.order {
+    font-family: lemonmilk;
+    font-size: 1 vw;
+}
+.orderbutton {
+    background-color: black;
+    border: 2px solid white;
+    color: #ff5733;
+    font-family: lemonmilk;
+    border-radius: 5px;
+}
+.order_background {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.summary {
+    margin-left: 6vw;
+    padding-top: 6vw;
+}
+
+.circle {
+    width: 10vw;
+    height: 10vw;
+    line-height: 10vw;
+    border-radius: 50%;
+    font-size: 5vw;
+    color: #fff;
+    text-align: center;
+    background: #ff442c;
+}
+
+.circle2 {
+    margin-left: 3vw;
+    width: 7vw;
+    height: 7vw;
+    line-height: 7vw;
+    border-radius: 50%;
+    font-size: 5vw;
+    color: #fff;
+    text-align: center;
+    background: #ff442c;
+}
+
+.food-name-cart {
+    margin-left: 3vw;
+    font-family: sfpro;
+    font-size: 4vw;
+}
+
+.cart-price {
+    text-align: right;
+    font-family: sfpro;
+    font-size: 4vw;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.addmore img {
+    margin-top: 4vw;
+    max-width: 30vw;
+}
+
+select {
+    background-color: black;
+    color: white;
+    border-radius: 5vw;
+    padding: 8px; /* Adjust padding as needed */
+    border: 1px solid white; /* Optional: add a white border */
+    width: 20vw; /* Set width as desired */
+}
+
+h3 {
+    font-family: sfpro;
+}
+
+.cart-icon {
+    position: fixed;
+    background-color: #565656;
+    padding: 8px;
+    border-radius: 12px;
+    left: 20px;
+    top: 20px;
+}
+
+.cart-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #481c1c;
+    color: white;
+    font-family: lemonmilk;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+.navbar img {
+    margin-left: 1vw;
+    height: 70px; /* Adjust as needed */
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+.navbar ul li {
+    margin-right: 20px;
+}
+.welcome-heading {
+    margin-top: 2vw;
+    margin-left: 2vw;
+    font-size: 24px;
+}
+
+.menu-item-admin {
+    text-align: left;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-right: 1vw;
+    width: 350px;
+    margin-bottom: 5vw;
+    display: inline-block; /* Display items in a row */
+    vertical-align: top; /* Align items at the top of the row */
+}
+
+.menu-item-admin img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style for the food name */
+.food-name-admin {
+    font-family: sfpro;
+    font-size: 30px;
+}
+
+/* Style for the food price */
+.food-price-admin {
+    color: #ff5733; /* You can choose your desired color */
+    font-family: lemonmilk;
+    font-size: 30px;
+}
+
+.menu-admin {
+    margin-top: 5vw;
+}
+
+h2 {
+    font-family: lemonmilk;
+}
+
+h1 {
+    font-family: lemonmilk;
+}
+
+.edit-delete {
+    margin-top: 0.5vw;
+    display: flex;
+}
+.edit-delete img {
+    max-width: 100px;
+}
+
+input {
+    background-color: black;
+    color: white;
+    border-radius: 5vw;
+    padding: 12px; /* Adjust padding as needed */
+    border: 1px solid white; /* Optional: add a white border */
+    width: 15vw; /* Set width as desired */
+}
+
+textarea {
+    background-color: black;
+    color: white;
+    border-radius: 5vw;
+    padding: 8px; /* Adjust padding as needed */
+    border: 1px solid white; /* Optional: add a white border */
+    width: 15vw; /* Set width as desired */
+}
+
+@media only screen and (max-width: 600px) {
+    .menu-list {
+        display: grid;
+        grid-gap: 8px;
+        justify-items: space-between;
+        justify-items: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .menu-list {
+        display: grid;
+        grid-gap: 8px;
+        justify-items: space-between;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .menu-list {
+        display: grid;
+        grid-gap: 8px;
+        justify-items: space-between;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .menu-list {
+        display: grid;
+        grid-gap: 8px;
+        justify-items: space-between;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
