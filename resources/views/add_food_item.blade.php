@@ -23,25 +23,25 @@
 
     <div class="welcome-heading">
         <h1>Welcome to the admin panel</h1>
+        <h2>Menu</h2>
         <div class="menu-admin">
-            <h2>Menu</h2>
             @foreach($foodItems as $foodItem)
             <div class="menu-item-admin">
                 @if($foodItem->image)
-                <img src="{{ asset('images/' . $foodItem->image) }}" alt="Food Image">
+                <img src="{{ asset('images/' . $foodItem->image) }}" class="menu-img" alt="Food Image">
                 @endif
                 <div class="food-name-admin">{{ $foodItem->name }}</div>
                 <div class="food-price-admin">Rp{{ $foodItem->price }}</div>
                 <div class="food-name-admin">{{ $foodItem->description }}</div>
                 <div class="edit-delete">
                     <a href="{{ route('food_items.editForm', $foodItem->id) }}">
-                        <img src="images/editbutton.png" alt="">
+                        <img src="images/editbutton.png" class="btn-img" alt="">
                     </a>
                     <form method="POST" action="{{ route('food_items.destroy', $foodItem->id) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
-                            <img src="images/deletebutton.png" alt="Delete">
+                            <img src="images/deletebutton.png" class="btn-img" alt="Delete">
                         </button>
                     </form>
 
