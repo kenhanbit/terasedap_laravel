@@ -7,6 +7,8 @@ use App\Http\Controllers\FoodItemController;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,18 @@ Route::get('/generate-url/{table}', function ($table) {
 });
 
 Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items');
+
+Route::controller(LoginRegisterController::class)->group(function() {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
+Route::resource('categories', CategoryController::class);
+// Route::get('/menu', [MenuController::class, 'showMenu']);
 
 Route::get('/add-food-item', [FoodItemController::class, 'createForm']);
 Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView']);
