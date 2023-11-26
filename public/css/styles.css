@@ -8,10 +8,29 @@
     src: url("../fonts/lemonmilk.otf") format("truetype");
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    opacity: 0.2;
+}
+
+::-webkit-scrollbar:hover {
+    background-color: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #565656;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
 * {
     padding: 0;
     margin: 0;
-    font-family: lemonmilk;
+    font-family: sfpro;
 }
 
 body {
@@ -82,13 +101,37 @@ ul.horizontal-list li:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #292929;
     text-align: left;
-    border: 1px solid #ddd;
-    padding: 5px;
+    padding: 8px;
     width: 86%;
     min-height: max-content;
     margin-bottom: 12px;
     transition: 100ms;
+    border-radius: 16px;
+}
+
+.item-button {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.item-button button {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    border: solid 2px #ff442c;
+    background-color: #ff442c;
+    padding: 4px;
+    margin: 6px;
+    border-radius: 20px;
+    transition: 100ms;
+}
+
+.item-button button:hover {
+    background: none;
+    color: #ff442c;
+    cursor: pointer;
 }
 
 .menu-detail {
@@ -99,8 +142,14 @@ ul.horizontal-list li:hover {
 
 .menu-item:hover {
     cursor: pointer;
+    background-color: #313131;
     .food-name {
         color: #fb3c2c;
+    }
+
+    img {
+        transform: scale(1);
+        box-shadow: 0px 3px 1px #481c1c;
     }
 }
 
@@ -131,8 +180,12 @@ ul.horizontal-list li:hover {
 /* Style for the food image */
 .menu-item img {
     width: 100%;
+    margin: auto;
     aspect-ratio: 1/1;
     object-fit: cover;
+    border-radius: 8px;
+    transform: scale(0.96);
+    transition: 100ms;
 }
 
 /* Style for the food name */
@@ -141,6 +194,7 @@ ul.horizontal-list li:hover {
     font-family: sfpro;
     font-size: 21px;
     text-decoration-line: none;
+    transition: 160ms;
 }
 
 /* Style for the food price */
@@ -148,6 +202,19 @@ ul.horizontal-list li:hover {
     color: #ff5733; /* You can choose your desired color */
     font-family: lemonmilk;
     font-size: 18px;
+    text-decoration-line: none;
+}
+
+.item-quantity {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    background-color: #232323;
+    width: 20%;
+    height: 32px;
+    color: #e9e9e9;
+    font-family: lemonmilk;
+    font-size: 21px;
     text-decoration-line: none;
 }
 
@@ -253,6 +320,7 @@ h3 {
     border-radius: 12px;
     left: 20px;
     top: 20px;
+    z-index: 2;
 }
 
 .cart-icon img {
@@ -344,10 +412,9 @@ h1 {
 input {
     background-color: black;
     color: white;
-    border-radius: 5vw;
-    padding: 12px; /* Adjust padding as needed */
-    border: 1px solid white; /* Optional: add a white border */
-    width: 15vw; /* Set width as desired */
+    border-radius: 12px;
+    padding: 2px; /* Adjust padding as needed */
+    border: 1px solid #565656; /* Optional: add a white border */
 }
 
 textarea {

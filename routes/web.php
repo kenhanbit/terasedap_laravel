@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\FoodItemController;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +19,25 @@ use App\Http\Controllers\FoodItemController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('menu');
+Route::get('/generate-url/{table}', function ($table) {
+    $url = URL::signedRoute('food-items', ['table' => $table]);
+    Session::put('table', $table);
+    $date = date('Ymd');
+    $count = Cart::where('created_at', $date)->count();
+    $count += 1;
+    $code = $date . str_pad($table, 2, '0', STR_PAD_LEFT) . str_pad($count, 3, '0', STR_PAD_LEFT);
+    Session::put('order_code', $code);
+
+    Cart::create([
+        'table_number' => $table,
+        'order_code' => $code,
+        'total_price' => 0,
+    ]);
+
+    return redirect()->route('food-items');
 });
 
-
-Route::get('/menu', [MenuController::class, 'showMenu']);
+Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items');
 
 Route::get('/add-food-item', [FoodItemController::class, 'createForm']);
 Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView']);
@@ -30,16 +46,12 @@ Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('foodi
 Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food-item.edit');
 Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update');
 
-Route::get('/food-items', [FoodItemController::class, 'displayAll'])->name('food-items');
 
 Route::get('/fooditem/{id}/description', [FoodItemController::class, 'showDescription'])->name('fooditem.description');
 Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->name('food_items.destroy');
 
 // Route for displaying the edit form for a food item
 Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food_items.editForm');
-
-
-
 
 Route::post('/add-to-cart/{name}/{id}/{price}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
