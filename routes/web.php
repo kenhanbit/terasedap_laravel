@@ -22,26 +22,29 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/generate-url/{table}', function ($table) {
-    $url = URL::signedRoute('food-items', ['table' => $table]);
+    $url = URL::signedRoute('food-items', ['table' => $table], now()->addHour(), false);
     Session::put('table', $table);
     $date = date('Ymd');
     $count = Cart::where('created_at', $date)->count();
     $count += 1;
     $code = $date . str_pad($table, 2, '0', STR_PAD_LEFT) . str_pad($count, 3, '0', STR_PAD_LEFT);
     Session::put('order_code', $code);
+    $cart = Cart::where('order_code', $code)->first();
 
-    Cart::create([
-        'table_number' => $table,
-        'order_code' => $code,
-        'total_price' => 0,
-    ]);
+    if (!$cart) {
+        Cart::create([
+            'table_number' => $table,
+            'order_code' => $code,
+            'total_price' => 0,
+        ]);
+    }
 
-    return redirect()->route('food-items');
+    return redirect($url);
 });
 
-Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items');
+Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items')->middleware('signed:relative');
 
-Route::controller(LoginRegisterController::class)->group(function() {
+Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
     Route::get('/login', 'login')->name('login');
