@@ -11,9 +11,18 @@
                 <form action="{{ route('store') }}" method="post">
                     @csrf
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
+                        <label for="firstname" class="col-md-4 col-form-label text-md-end text-start">First Name</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="firstname" name="firstname" value="{{ old('firstname') }}">
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="lastname" class="col-md-4 col-form-label text-md-end text-start">Last Name</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="lastname" name="lastname" value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
