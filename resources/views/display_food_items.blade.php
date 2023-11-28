@@ -23,8 +23,7 @@
             </a>
         </div>
     </nav>
-
-
+    
     <div class="motto">Experience Indonesian Culinary</div>
     <div class="centered-list">
         <ul class="horizontal-list">
@@ -45,22 +44,7 @@
         <div class="menu">
             <div class="menu-list">
                 @foreach($foodItems->where('category_id', $category->id) as $item)
-                    <div class="menu-item">
-                        <a href="{{ route('fooditem.description', ['id' => $item->id]) }}">
-                        <div>
-                                @if($item->image)
-                                <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}">
-                            @else
-                            <p>No image available</p>
-                            @endif
-                            <div class="menu-detail">
-                                <p class="food-name">{{ $item->name }}</p>
-                                <p class="food-price">Rp.{{ $item->price }}</p>
-                            </div>
-                        </div>
-                    </a>
-                        <livewire:components.addMenuButton />
-                    </div>
+                    <livewire:components.menu-card :item="$item" />
                 @endforeach
                 </div>
         </div>
