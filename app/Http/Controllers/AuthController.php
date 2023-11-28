@@ -55,4 +55,27 @@ class AuthController extends Controller
         // Redirect atau kirim respons sukses
         return redirect('/login')->with('success', 'Registration successful! Please login.');
     }
+
+
+    public function authenticate()
+    {
+        dd(request()->all());
+
+        $validated = request()->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:8'
+            ]
+            );
+
+         if(auth()->attempt($validated)){
+            request()->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success','Logged in successfully!');
+         }
+    
+         return redirect() -> route ('login')->withErros([
+            'email' => "No matching user found with the provided email and password"
+         ]);
+    }
 }
