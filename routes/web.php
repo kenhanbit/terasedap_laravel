@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\FoodItemController;
+
 use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -85,3 +86,6 @@ Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.
 Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('order.show');
 
 Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
+
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
