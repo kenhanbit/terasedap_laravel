@@ -14,15 +14,11 @@
                 <h4>+0121872718724</h4>
             </div>
             <div class="col">
-                <h3>Newsletter</h3>
-                <form>
-                    <i class="fa-regular fa-envelope fa-xl"></i>
-                    <input type="email" placeholder="Enter your email id " required>
-                    <button type="submit"><i class="fa-solid fa-arrow-right fa-xl"></i></button>
-                </form>
+                <a href="https://www.instagram.com/terasedap/">
                 <div class="social-icon"> 
-                    <i class="fa-brands fa-instagram fa-xl"></i>
+                   <i class="fa-brands fa-instagram fa-xl"></i>
                 </div>
+                </a>
             </div> 
            
         </div>
