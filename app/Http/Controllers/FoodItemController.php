@@ -83,6 +83,10 @@ class FoodItemController extends Controller
 
     public function displayAll()
     {
+        if (!Session::has('order_code')) {
+            return redirect()->route('scan_qr');
+        }
+
         $categories = Category::all();
         $foodItems = FoodItem::all();
         return view('display_food_items', ['foodItems' => $foodItems, 'categories' => $categories]);

@@ -22,10 +22,16 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/generate-url/{table}', function ($table) {
-    $url = URL::signedRoute('food-items', ['table' => $table], now()->addHour(), false);
+    $url = URL::signedRoute('check-route-validation', ['table' => $table], now()->addHour());
+    return redirect($url);
+});
+
+Route::get('/validation/{table}', function ($table) {
     Session::put('table', $table);
     $date = date('Ymd');
-    $count = Cart::where('created_at', $date)->count();
+    $count = Cart::where('status', '!=', 'pending')
+        ->where('table_number', $table)
+        ->count();
     $count += 1;
     $code = $date . str_pad($table, 2, '0', STR_PAD_LEFT) . str_pad($count, 3, '0', STR_PAD_LEFT);
     Session::put('order_code', $code);
@@ -38,11 +44,13 @@ Route::get('/generate-url/{table}', function ($table) {
             'total_price' => 0,
         ]);
     }
+    return redirect()->route('food-items');
+})->name('check-route-validation')->middleware('signed');
 
-    return redirect($url);
-});
+// Route::get('/menu', [MenuController::class])->name('food-items')->middleware('signed:relative');
 
-Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items')->middleware('signed:relative');
+Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
@@ -55,6 +63,14 @@ Route::controller(LoginRegisterController::class)->group(function () {
 
 Route::resource('categories', CategoryController::class);
 // Route::get('/menu', [MenuController::class, 'showMenu']);
+
+Route::get('/thankyou', function () {
+    return view('thank_you');
+})->name('thank_you');
+
+Route::get('/error', function () {
+    return view('scan_qr');
+})->name('scan_qr');
 
 Route::get('/add-food-item', [FoodItemController::class, 'createForm']);
 Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView']);
@@ -72,7 +88,6 @@ Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])-
 
 Route::post('/add-to-cart/{name}/{id}/{price}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 
 Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
 Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');

@@ -114,6 +114,7 @@ ul.horizontal-list li:hover {
 .item-button {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .item-button button {
@@ -251,43 +252,105 @@ ul.horizontal-list li:hover {
 }
 
 .summary {
-    margin-left: 6vw;
-    padding-top: 6vw;
+    margin: 20px 16px;
 }
 
-.circle {
-    width: 10vw;
-    height: 10vw;
-    line-height: 10vw;
-    border-radius: 50%;
-    font-size: 5vw;
-    color: #fff;
+.cart-item {
+    border-bottom: solid 2px #565656;
+    padding: 16px;
+    margin-top: 8px;
+}
+
+.cart-item a {
+    text-decoration-line: none;
+    color: #e9e9e9;
+}
+
+.item-detail {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-between;
+}
+
+.name-description {
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-name {
+    font-family: lemonmilk;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.item-image {
+    width: 132px;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background-color: #e7e7e7;
+}
+
+.item-image img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.order-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cart-item-quantity {
+    font-family: lemonmilk;
     text-align: center;
-    background: #ff442c;
+    width: 40px;
+    font-size: 16px;
+    padding: 4px;
+    height: 100%;
 }
 
-.circle2 {
-    margin-left: 3vw;
-    width: 7vw;
-    height: 7vw;
-    line-height: 7vw;
-    border-radius: 50%;
-    font-size: 5vw;
-    color: #fff;
-    text-align: center;
-    background: #ff442c;
+.quantity-item {
+    border-radius: 20px;
+    padding: 2px;
 }
 
-.food-name-cart {
-    margin-left: 3vw;
-    font-family: sfpro;
-    font-size: 4vw;
+.item-price {
+    font-weight: 600;
+    font-size: 20px;
 }
 
-.cart-price {
-    text-align: right;
-    font-family: sfpro;
-    font-size: 4vw;
+.add-notes {
+    border: none;
+    vertical-align: middle;
+    padding: 4px 10px;
+    background-color: #313131;
+    border-radius: 16px;
+    font-size: 16px;
+    max-width: max-content;
+    color: #e7e7e7;
+}
+
+.alert-warning {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #ccbd38;
+    border-radius: 8px;
+    border: solid 2px #474103;
+    opacity: 0.8;
+    color: #474103;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    z-index: 3;
 }
 
 .wrapper {
@@ -296,8 +359,60 @@ ul.horizontal-list li:hover {
 }
 
 .addmore img {
-    margin-top: 4vw;
-    max-width: 30vw;
+    margin-top: 0.5rem;
+    max-width: 130px;
+}
+
+.selection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtotal {
+    font-family: sfpro;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-order {
+    padding: 8px 16px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 20px;
+    border: solid 2px #481c1c;
+    color: #481c1c;
+    background-color: #fb3c2c;
+    font-weight: bold;
+    transition: 100ms;
+}
+.cart-order:hover {
+    color: #1a0707;
+    cursor: pointer;
+}
+
+.thankyou {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    text-align: center;
+}
+
+.back-to-home {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 28px;
+    text-align: center;
+}
+
+.thankyou a {
+    font-size: 20px;
 }
 
 select {
@@ -373,7 +488,6 @@ h3 {
     margin-bottom: 5vw;
     display: inline-block; /* Display items in a row */
     vertical-align: top; /* Align items at the top of the row */
-    
 }
 
 .menu-img {
@@ -386,8 +500,6 @@ h3 {
     max-width: 100%;
     height: auto;
 }
-
-
 
 /* Style for the food name */
 .food-name-admin {

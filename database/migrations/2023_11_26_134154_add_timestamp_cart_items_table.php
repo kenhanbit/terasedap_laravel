@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->timestamps();
+            $table->dropColumn(['created_at', 'updated_at']);
         });
     }
 };

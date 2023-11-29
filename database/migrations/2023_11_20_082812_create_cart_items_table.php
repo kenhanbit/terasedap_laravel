@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('food_item_id');
             $table->integer('quantity');
-            $table->decimal('food_price', 10, 2); // Adding the 'price' column
+            $table->integer('food_price'); // Adding the 'price' column
             // Other fields as needed
             $table->foreign('food_item_id')->references('id')->on('food_items')->cascadeOnDelete();
             // Define a foreign key to link cart items to food items

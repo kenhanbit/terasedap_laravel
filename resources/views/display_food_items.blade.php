@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Management</title>
+    <title>Terasedap - Menu</title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}" />
 </head>
 
 <body>
+    @error('code')
+    <div class="alert-warning">
+        Please scan the qr code
+    </div>
+    @enderror
     <nav>
         <center>
             <div class="logo">

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('food_items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 10, 2);
+            $table->integer('price');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('category_id'); // New column for category relationship
