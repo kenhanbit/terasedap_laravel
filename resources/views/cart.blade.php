@@ -19,7 +19,7 @@
         <h2>Cart Summary</h2>
         <div id="cart-list">
             @foreach ($cart->items as $item)
-            <livewire:Components.CardItems :detail="$item" :fooddetail="$item->food" />
+            <livewire:Components.CardItems :detail="$item" :fooddetail="$item->food" wire:key="{{ $item->id }}" />
             @endforeach
         </div>
         <div class="addmore">

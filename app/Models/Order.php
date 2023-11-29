@@ -11,7 +11,7 @@ class Order extends Model
     // Relationships
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(CartItem::class, 'order_code', 'order_code');
     }
     use HasFactory;
 }

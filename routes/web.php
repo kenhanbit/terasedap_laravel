@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,8 @@ Route::controller(LoginRegisterController::class)->group(function () {
 Route::resource('categories', CategoryController::class);
 // Route::get('/menu', [MenuController::class, 'showMenu']);
 
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.view');
+
 Route::get('/thankyou', function () {
     return view('thank_you');
 })->name('thank_you');
@@ -92,9 +95,6 @@ Route::post('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])
 
 Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
 Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
-
-Route::get('/show-order', [CartController::class, 'showOrder'])->name('orders.show');
-
 
 Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.destroy');
 

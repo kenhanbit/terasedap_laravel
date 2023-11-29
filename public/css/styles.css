@@ -415,6 +415,20 @@ ul.horizontal-list li:hover {
     font-size: 20px;
 }
 
+#orders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.table-order {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    margin: 20px;
+}
+
 select {
     background-color: black;
     color: white;
