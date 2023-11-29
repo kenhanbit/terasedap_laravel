@@ -11,9 +11,14 @@ class CartItem extends Model
     protected $guarded = [];
 
     // Define relationships
-    public function foodItem(): BelongsTo
+    public function cart(): BelongsTo
     {
-        return $this->belongsTo(Cart::class, 'order_code');
+        return $this->belongsTo(Cart::class, 'order_code', 'order_code');
+    }
+
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(FoodItem::class, 'food_item_id', 'id');
     }
 
     use HasFactory;

@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->string('order_code', 20);
-            $table->foreign('order_code')->references('order_code')->on('carts');
+            $table->string('notes', 200)->nullable();
         });
     }
 
@@ -23,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->dropForeign(['order_code']);
-            $table->dropColumn(['order_code']);
+            $table->dropColumn('notes');
         });
     }
 };

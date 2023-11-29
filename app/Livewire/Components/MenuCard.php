@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Models\CartItem;
+use App\Models\Cart;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -34,27 +35,63 @@ class MenuCard extends Component
 
     public function addItem()
     {
-        $code = session()->get('order_code');
-        CartItem::create([
-            'food_item_id' => $this->item->id,
-            'quantity' => 1,
-            'food_price' => $this->item->price,
-            'order_code' => $code,
-        ]);
+        if (session()->has('table') && session()->has('order_code')) {
+            $code = session()->get('order_code');
+            DB::transaction(function () use ($code) {
+                CartItem::create([
+                    'food_item_id' => $this->item->id,
+                    'quantity' => 1,
+                    'food_price' => $this->item->price,
+                    'order_code' => $code,
+                ]);
+
+                $cart = Cart::where('order_code', $code)->first();
+                $cart->total_price += $this->item->price;
+                $cart->save();
+            });
+        } else {
+            session()->flash('scan-table', 'Please scan the QR code on the table.');
+        }
     }
 
     public function increment(CartItem $cartItem)
     {
-        $cartItem->increment('quantity');
+        DB::transaction(function () use ($cartItem) {
+            $price = $cartItem->food->price;
+
+            $cartItem->increment('quantity');
+
+            $cartItem->food_price += $price;
+            $cartItem->save();
+
+            $cartItem->cart->total_price += $price;
+            $cartItem->push();
+        });
     }
 
     public function decrement(CartItem $cartItem)
     {
-        $cartItem->decrement('quantity');
+        DB::transaction(function () use ($cartItem) {
+            $price = $cartItem->food->price;
+
+            $cartItem->decrement('quantity');
+
+            $cartItem->food_price -= $price;
+            $cartItem->save();
+
+            $cartItem->cart->total_price -= $price;
+            $cartItem->push();
+        });
     }
 
     public function remove(CartItem $cartItem)
     {
-        $cartItem->delete();
+        DB::transaction(function () use ($cartItem) {
+            $price = $cartItem->food->price;
+            $cartItem->cart->total_price -= $price;
+            $cartItem->push();
+
+            $cartItem->delete();
+        });
     }
 }

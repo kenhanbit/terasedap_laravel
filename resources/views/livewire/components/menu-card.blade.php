@@ -22,7 +22,8 @@
         <input type="text" class="item-quantity" value="{{ $cart_item->quantity }}" disabled />
         <button wire:click.prevent="increment({{$cart_item->id}})" wire:loading.attr="disabled"><x-iconsax-out-add style="width:20px" /></button>
         @else
-        <button style="width: 100%;" wire:click.prevent="addItem">Add to Cart</button>
+        <button style="width: 100%;" wire:click.prevent="addItem">
+            Add to Cart</button>
         @endif
     </div>
 </div>

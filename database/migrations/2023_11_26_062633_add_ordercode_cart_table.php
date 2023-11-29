@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->string('order_code', 20)->unique();
+            $table->string('order_code', 20)->constrained()->unique();
         });
     }
 

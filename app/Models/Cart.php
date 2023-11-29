@@ -10,9 +10,9 @@ class Cart extends Model
 {
     protected $guarded = [];
 
-    public function cartItem(): HasMany
+    public function items(): HasMany
     {
-        return $this->hasMany(CartItem::class);
+        return $this->hasMany(CartItem::class, 'order_code', 'order_code');
     }
 
     public function generateCode($table)
