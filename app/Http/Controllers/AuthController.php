@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\welcomemail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use app\mail\RegisterMail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 use App\Models\User; // Import model User
 
@@ -50,13 +56,16 @@ class AuthController extends Controller
         // Simpan data user ke dalam database
         $user = User::create($validatedData);
 
+
         // Lakukan operasi lain seperti autentikasi atau pengiriman email verifikasi
+        Mail::to($user->email)->send(new RegisterMail($user));
 
         // Redirect atau kirim respons sukses
         return redirect('/login')->with('success', 'Registration successful! Please login.');
     }
 
 
+    
     public function authenticate()
     {
         dd(request()->all());
@@ -78,4 +87,30 @@ class AuthController extends Controller
             'email' => "No matching user found with the provided email and password"
          ]);
     }
+
+    public function create_user(Request $request)
+    {
+        request()->validate([
+            'name' => 'required',
+            'email0' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+
+        $save = new User;
+        $save->firstname = trim($request->firstname);
+        $save->lastname = trim($request->lastname);
+        $save->email = trim($request->email);
+        $save->password = Hash::make($request->password);
+        $save->remember_token = Str::random(40);
+
+        $save->save();
+        Mail::to($save->email)->send(new RegisterMail($save));
+
+        return redirect('login')->with('success');
+
+    }
+
+
+
+
 }

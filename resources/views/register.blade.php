@@ -11,7 +11,7 @@
     <div class="min-h-screen flex items-center justify-center">
         <div class="bg-white p-8 rounded shadow-md w-96">
             <h1 class="text-2xl font-bold mb-4">Sign Up</h1>
-            <form action="/signup" method="POST">
+            <form action="{{route('signup')}}" method="POST">
                 @csrf
                 <div class="grid grid-cols-2 gap-4">
                     <input type="text" name="first_name" id="first_name" class="mb-3 p-2 rounded-md border border-gray-300" placeholder="First Name" autocomplete="off" required>

@@ -6,7 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use app\mail\RegisterMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 class LoginRegisterController extends Controller
 {
@@ -38,6 +42,7 @@ class LoginRegisterController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
@@ -53,10 +58,9 @@ class LoginRegisterController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('dashboard')
-            ->withSuccess('You have successfully registered & logged in!');
+        return redirect()->route('login')
+            ->withSuccess('Login');
     }
 
     /**
@@ -77,6 +81,9 @@ class LoginRegisterController extends Controller
      */
     public function authenticate(Request $request)
     {
+
+        return new RegisterMail(auth()->user);
+        
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -123,5 +130,28 @@ class LoginRegisterController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login')
             ->withSuccess('You have logged out successfully!');;
+    }
+
+
+    public function create_user(Request $request)
+    {
+        request()->validate([
+            'name' => 'required',
+            'email0' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+
+        $save = new User;
+        $save->firstname = trim($request->firstname);
+        $save->lastname = trim($request->lastname);
+        $save->email = trim($request->email);
+        $save->password = Hash::make($request->password);
+        $save->remember_token = Str::random(40);
+
+        $save->save();
+        Mail::to($save->email)->send(new RegisterMail($save));
+
+        return redirect('login')->with('success');
+
     }
 }
