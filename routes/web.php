@@ -97,9 +97,6 @@ Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('co
 Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
 
 Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.destroy');
-
-Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('order.show');
-
 Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
 
 

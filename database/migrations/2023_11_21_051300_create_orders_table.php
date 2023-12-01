@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('table_number');
             $table->integer('total_price');
             $table->string('payment_method', 20);
-            $table->string('status', 20)->default('unpayed');
+            $table->string('status', 20)->default('unpaid');
             // Add more columns as needed for the cart items
             $table->timestamps();
         });

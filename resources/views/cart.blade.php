@@ -33,16 +33,18 @@
         </div>
         <form action="{{ route('confirmOrder') }}" method="post">
             @csrf
-            <div class="selection">
-                <h3>Select payment method</h3>
-                <select name="paymentMethod" id="paymentMethod">
-                    <option value="cash">Cash</option>
-                    <option value="qris">QRIS</option>
-                    <option value="card">Card</option>
-                </select>
-            </div>
-            <div style="display: flex; width:100%; justify-content:flex-end;margin-top: 20px;">
-                <button type="submit" class="cart-order">Place Order</button>
+            <div style="width: 100%;">
+                <div class="selection">
+                    <h3>Select payment method</h3>
+                    <select name="paymentMethod" id="paymentMethod">
+                        <option value="cash">Cash</option>
+                        <option value="qris">QRIS</option>
+                        <option value="card">Card</option>
+                    </select>
+                </div>
+                <div style="display: flex; width:100%; justify-content:flex-end;margin-top: 20px;">
+                    <button type="submit" class="cart-order">Place Order</button>
+                </div>
             </div>
         </form>
     </div>

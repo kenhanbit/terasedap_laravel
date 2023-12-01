@@ -101,7 +101,7 @@ class LoginRegisterController extends Controller
      */
     public function dashboard()
     {
-        $orders = Order::where('status', '!=', 'completed')->orderBy('table_number', 'asc')->get();
+        $orders = Order::where('status', '!=', 'paid')->orderBy('table_number', 'asc')->get();
         // if (Auth::check()) {
         return view('auth.dashboard', ['orders' => $orders]);
         // }

@@ -365,6 +365,7 @@ ul.horizontal-list li:hover {
 
 .selection {
     display: flex;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -423,10 +424,33 @@ ul.horizontal-list li:hover {
 
 .table-order {
     display: flex;
+    align-items: center;
     width: 150px;
     height: 150px;
     padding: 20px;
     margin: 20px;
+    border-radius: 30px;
+    color: #232323;
+}
+
+.table-order:hover {
+    cursor: pointer;
+}
+
+.unpaid {
+    background-color: #ccbd38;
+}
+
+.unpayed {
+    background-color: #ccbd38;
+}
+
+.received {
+    background-color: #617bee;
+}
+
+.paid {
+    background-color: #61ee68;
 }
 
 select {
@@ -461,7 +485,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #481c1c;
+    background-color: #3d3d3d;
     color: white;
     font-family: lemonmilk;
 }
@@ -564,6 +588,177 @@ textarea {
     padding: 8px; /* Adjust padding as needed */
     border: 1px solid white; /* Optional: add a white border */
     width: 15vw; /* Set width as desired */
+}
+
+footer {
+    width: 100%;
+    position: inline;
+    bottom: 0;
+    background-color: #3d3d3d;
+    font-size: 13px;
+    line-height: 20px;
+    color: white;
+    padding: 30px;
+}
+
+.row {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.col {
+    flex-basis: 25%;
+    padding: 10px;
+}
+
+.col h3 {
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.logofoot {
+    width: 160px;
+    margin-bottom: 30px;
+}
+
+.email-id {
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+#main {
+    min-height: 100vh;
+    margin: 10px 16px;
+}
+
+.order-modal-background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #232323;
+    opacity: 0.3;
+}
+
+.order-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: max-content;
+    max-width: 100vw;
+    background-color: #ffffff;
+    color: #232323;
+    z-index: 2;
+    border-radius: 8px;
+}
+
+.modal-header {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+.modal-footer {
+    padding: 16px;
+}
+
+.modal-button {
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    margin-left: 8px;
+}
+
+.close {
+    background-color: #969696;
+}
+
+.cancel {
+    background-color: #ff5733;
+    color: #e9e9e9;
+    font-weight: 600;
+}
+
+.order-modal-detail {
+    display: flex;
+}
+
+.detail-price {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.delete-button-icon {
+    height: 18px;
+    width: 18px;
+    transform: rotate(45deg);
+    margin-left: 10px;
+    color: #ff442c;
+}
+
+.delete-button-icon:hover {
+    cursor: pointer;
+}
+
+.delete-modal-textarea {
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    border: solid 1px #777777;
+    color: #232323;
+    width: 100%;
+    height: 80px;
+}
+
+form {
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+}
+
+form .fa-regular {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+form .input {
+    width: 100%;
+    background: transparent;
+    color: #ccc;
+    border: 0;
+    outline: none;
+}
+
+.social-icon .fa-brands {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: #000;
+    background: #fff;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

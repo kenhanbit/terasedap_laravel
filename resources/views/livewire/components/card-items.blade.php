@@ -1,5 +1,5 @@
 <div class="cart-item">
-    <a href="{{route('fooditem.description')}}">
+    <a href="{{route('fooditem.description', ['id' => $food->id])}}">
         <div class="item-detail">
             <div class="name-description">
                     <p class="item-name">
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="item-price">
-            Rp. {{ number_format($detail->food_price, 0, '', '.')}}
+            Rp {{ number_format($detail->food_price, 0, '', '.')}}
         </div>
     </a>
     <div class="order-detail">
