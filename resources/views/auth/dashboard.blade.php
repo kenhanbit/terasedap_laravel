@@ -2,29 +2,20 @@
 
 @section('content')
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">Dashboard</div>
-            <div class="card-body">
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        {{ $message }}
-                    </div>
-                @else
-                    <div class="alert alert-success">
-                        You are logged in!
-                    </div>
-                @endif                
-            </div>
-            <button onclick="window.location.href='/add-food-item'" class="btn btn-primary">
-                Go to Add Food Item
-            </button>
-            <button onclick="window.location.href='/categories'" class="btn btn-warning">
-                Go to Category CRUD
-            </button>
-        </div>
-    </div>    
+<div id="main">
+    <div>
+        <h2>Orders</h2>
+    </div>
+    <div id="orders">
+        @foreach ($orders as $order)
+            <livewire:Components.AdminOrders :order="$order" wire:key="{{$order->id}}" />
+        @endforeach
+    </div>
+    @foreach ($orders as $order)
+    <livewire:Components.OrdersModal name="{{$order->order_code}}" :detail="$order" wire:key="{{$order->id}}" />
+    @endforeach
+    @foreach ($orders as $order)
+        <livewire:Components.DeleteModal orderId="{{$order->id}}" wire:key="{{$order->id}}" @deleteOrder="$refresh" />
+    @endforeach
 </div>
-
 @endsection

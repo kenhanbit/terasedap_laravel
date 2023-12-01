@@ -33,7 +33,7 @@
             $totalPrice = 0; // Initialize total price for each order
             @endphp
 
-            @foreach(json_decode($order->cart_items, true) as $item)
+            @foreach($order->items as $item)
             <li class="order">
                 {{ $item['food_item_name'] }} | Rp.{{ $item['food_item_price'] }} X {{ $item['quantity'] }}
             </li>

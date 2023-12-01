@@ -59,6 +59,7 @@ class CardItems extends Component
 
             $cartItem->delete();
         });
-        $this->dispatch('cart-change');
+
+        return redirect()->route('cart.view');
     }
 }

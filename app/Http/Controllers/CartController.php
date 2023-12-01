@@ -42,6 +42,10 @@ class CartController extends Controller
             $cart->status = 'ordered';
             $cart->save();
 
+            CartItem::where('order_code', Session::get('order_code'))->update([
+                'status' => 'ordered',
+            ]);
+
             $order = new Order();
             $order->order_code = Session::get('order_code');
             $order->table_number = Session::get('table');

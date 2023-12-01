@@ -8,7 +8,7 @@
             @endif
             <div class="menu-detail">
                 <p class="food-name">{{ $item->name }}</p>
-                <p class="food-price">Rp.{{ $item->price }}</p>
+                <p class="food-price">Rp {{ number_format($item->price, 0, '', '.') }}</p>
             </div>
         </div>
     </a>

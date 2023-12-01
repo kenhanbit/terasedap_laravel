@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginRegisterController extends Controller
 {
@@ -99,8 +101,9 @@ class LoginRegisterController extends Controller
      */
     public function dashboard()
     {
+        $orders = Order::where('status', '!=', 'paid')->orderBy('table_number', 'asc')->get();
         // if (Auth::check()) {
-        return view('auth.dashboard');
+        return view('auth.dashboard', ['orders' => $orders]);
         // }
 
         // return redirect()->route('login')
@@ -117,6 +120,7 @@ class LoginRegisterController extends Controller
      */
     public function logout(Request $request)
     {
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

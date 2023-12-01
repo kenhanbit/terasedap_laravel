@@ -20,6 +20,7 @@ class MenuCard extends Component
 
         $cart_item = CartItem::where('order_code', $code)
             ->where('food_item_id', $this->item->id)
+            ->where('status', 'cart')
             ->first();
 
 
