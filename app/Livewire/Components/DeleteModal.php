@@ -19,11 +19,18 @@ class DeleteModal extends Component
 
     public function deleteOrder(Order $order)
     {
+        $validated = request()->validate([
+            'cancel_reason' => 'required'
+        ]);
+
         DB::transaction(function () use ($order) {
             $canceled = new CanceledOrder();
             $canceled->order_id = $order->id;
             $canceled->canceled_reason = $this->cancel_reason;
             $canceled->save();
+
+            $order->status = 'canceled';
+            $order->save();
 
             $order->delete();
         });

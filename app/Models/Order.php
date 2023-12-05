@@ -17,7 +17,7 @@ class Order extends Model
     // Relationships
     public function items()
     {
-        return $this->hasMany(CartItem::class, 'order_code', 'order_code');
+        return $this->hasMany(OrderItem::class, 'order_code', 'order_code');
     }
 
     public function cart()

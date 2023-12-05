@@ -4,24 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'order_id',
-        'food_item_id',
-        'food_item_name',
+        'order_code',
         'quantity',
-        'price_per_item',
+        'single_price',
         'total_price',
-        // Add other fields that you want to be mass-assignable here
+        'menu_name',
     ];
 
-    // Relationships
-    public function order()
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_code', 'order_code');
     }
-
-    use HasFactory;
 }

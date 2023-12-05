@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\CartItem;
 use App\Models\FoodItem;
 use App\Models\OrderHistory;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -53,6 +54,17 @@ class CartController extends Controller
             $order->order_date = now();
             $order->payment_method = $request['paymentMethod'];
             $order->save();
+
+            foreach ($cart->items as $item) {
+                $orderItem = new OrderItem();
+                $orderItem->quantity = $item->quantity;
+                $orderItem->order_code = $item->order_code;
+                $orderItem->menu_name = $item->food->name;
+                $orderItem->single_price = $item->food->price;
+                $orderItem->total_price = $item->food_price;
+                $orderItem->notes = $item->notes;
+                $orderItem->save();
+            }
         });
 
         return redirect()->route('thank_you');

@@ -40,7 +40,7 @@ x-transition
                         <div>
                             <div style="margin-right:40px; display:flex;margin-bottom:4px;">
                                 <div style="margin-right:10px;">
-                                    {{$item->food->name}}
+                                    {{$item->menu_name}}
                                 </div>
                                 <div>
                                     x {{$item->quantity}}
@@ -51,7 +51,7 @@ x-transition
                             </div>
                         </div>
                         <div>
-                            Rp. {{ number_format($item->food_price, 0, '', '.') }} 
+                            Rp. {{ number_format($item->total_price, 0, '', '.') }} 
                             {{-- <x-iconsax-out-add-circle class="delete-button-icon" /> --}}
                         </div>
                     </div>
@@ -63,7 +63,7 @@ x-transition
             </div>
         </div>
         <div class="modal-footer" style="display:flex; justify-content: space-between;">
-            <button style="color: #fb3c2c; border: none; background: none;" x-on:click="$dispatch('open-delete-modal', {orderId : '{{$detail->id}}'})" orderId="{{$detail->id}}">
+            <button style="color: #fb3c2c; border: none; background: none; display:flex; align-items:center" x-on:click="$dispatch('open-delete-modal', {orderId : '{{$detail->id}}'})" orderId="{{$detail->id}}">
                 <x-iconsax-out-trash style="height: 18px;" /> Cancel Order
             </button>
             <div>
@@ -75,16 +75,11 @@ x-transition
                     <button class="modal-button received" wire:click="receiveOrder({{$detail->id}})">Receive</button>
                     @break
                     @case('received')
-                    <button class="modal-button paid" wire:click="payOrder({{$detail->id}})">Pay</button>
+                    <button class="modal-button paid" style="background-color:#67f372" wire:click="payOrder({{$detail->id}})">Pay</button>
                     @break
                 @endswitch
                 <button class="modal-button close" x-on:click="show = false">Close</button>
             </div>
         </div>
     </div>
-        {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-
-        {{-- @foreach ($detail->items as $item)
-            <livewire:Components.DeleteItemModal wire:key="{{$item->id}}" itemId="{{$item->id}}" />
-        @endforeach --}}
 </div>
