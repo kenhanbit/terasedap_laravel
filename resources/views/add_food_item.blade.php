@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{asset('css/styles.css')}}" />
-    <title>Document</title>
+    <title>Terasedap | Add Menu</title>
 </head>
 
 <body>

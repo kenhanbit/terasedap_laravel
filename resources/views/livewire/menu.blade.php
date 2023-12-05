@@ -7,6 +7,11 @@
         <p id="page-title">
             Menu Management
         </p>
+        <div style="margin-top:20px">
+            <a class="sign-button" href="{{ route('add-menu')}}">
+                Add Menu
+            </a>
+        </div>
         <livewire:components.menu-management />
     </div>
 </main>

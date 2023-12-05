@@ -18,7 +18,7 @@
     <div class=" greet-admin">
         <p class="h3">
             Hello, 
-            {{-- {{Auth::user()->firstname}} --}}
+            {{Auth::user()->firstname}}
         </p>
     </div>
     <nav>
@@ -29,6 +29,13 @@
         {{-- <a href="{{ route('admin.sales') }}" class="nav-menu {{ Route::is('admin.sales') ? 'active' : ''}}">Sales Report</a> --}}
         {{-- <a href="{{ route('admin.settings') }}" class="nav-menu {{ Route::is('admin.settings') ? 'active' : ''}}">User Settings</a> --}}
     </nav>
+    <div style="display:flex; justify-content:center; margin-top: 10rem;">
+        <a href="{{ route('logout') }}">
+            <div class="logout-button">
+                Logout <x-iconsax-out-logout style="margin-left: 8px; width: 22px; height: 22px;" />
+            </div>
+        </a>
+    </div>
 </div>
 
 <script>

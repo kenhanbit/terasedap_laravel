@@ -70,6 +70,15 @@ class CartController extends Controller
         return redirect()->route('thank_you');
     }
 
+    public function downloadReceipt($ordercode)
+    {
+        $order = Order::where('order_code', $ordercode)->first();
+        // $mpdf = new \Mpdf\Mpdf();
+        // $mpdf->WriteHTML(view('receipt', ['order' => $order]));
+        // $mpdf->Output();
+
+        return view('receipt', ['order' => $order]);
+    }
 
 
     public function showOrder()
