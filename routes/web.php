@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
@@ -10,7 +11,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\CategoryController;
-use App\Models\Category;
+use App\Livewire\Category;
+use App\Livewire\Menu;
+use App\Livewire\Order;
+use App\Livewire\OrderHistory;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +35,8 @@ Route::get('/generate-url/{table}', function ($table) {
 Route::get('/validation/{table}', function ($table) {
     Session::put('table', $table);
     $date = date('Ymd');
-    $count = Cart::where('status', '!=', 'pending')
+    $count = Cart::whereDate('created_at', now()->format('Y-m-d'))
+        ->where('status', '!=', 'pending')
         ->where('table_number', $table)
         ->count();
     $count += 1;
@@ -59,14 +64,14 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
     Route::get('/login', 'login')->name('login');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    // Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::resource('categories', CategoryController::class);
+// Route::resource('categories', CategoryController::class);
 // Route::get('/menu', [MenuController::class, 'showMenu']);
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.view');
+// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.view');
 
 Route::get('/thankyou', function () {
     return view('thank_you');
@@ -76,6 +81,16 @@ Route::get('/error', function () {
     return view('scan_qr');
 })->name('scan_qr');
 
+Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
+
+Route::get('/fooditem/{id}/description', [FoodItemController::class, 'showDescription'])->name('fooditem.description');
+
+Route::get('/admin/category', Category::class)->name('admin.category');
+Route::get('admin/orders', Order::class)->name('admin.orders');
+Route::get('admin/menu', Menu::class)->name('admin.menu');
+Route::get('admin/history', OrderHistory::class)->name('admin.history');
+
+
 Route::get('/add-food-item', [FoodItemController::class, 'createForm']);
 Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView']);
 Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('fooditem.store');
@@ -84,20 +99,15 @@ Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])
 Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update');
 
 
-Route::get('/fooditem/{id}/description', [FoodItemController::class, 'showDescription'])->name('fooditem.description');
 Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->name('food_items.destroy');
 
 // Route for displaying the edit form for a food item
 Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food_items.editForm');
 
-Route::post('/add-to-cart/{name}/{id}/{price}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+// Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
 
-Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
-Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
-
-Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.destroy');
-Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
+// Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.destroy');
+// Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

@@ -3,7 +3,7 @@
     <footer>
         <div class="row">
             <div class="col">
-                <img src="images/terasedap_logo.png" class="logofoot">
+                <img src="{{ asset('images/terasedap_logo.png')}}" class="logofoot">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <div class="col">
@@ -17,10 +17,10 @@
                 <a href="https://www.instagram.com/terasedap/">
                 <div class="social-icon"> 
                    <i class="fa-brands fa-instagram fa-xl"></i>
+                   terasedap
                 </div>
                 </a>
             </div> 
-           
         </div>
     </footer>
 </div>

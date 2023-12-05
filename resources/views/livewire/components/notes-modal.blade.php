@@ -1,3 +1,31 @@
-<div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+<div
+    x-data="{show: false, itemId: '{{ $itemId }}'}"
+    x-show="show"
+    x-on:open-notes.window="console.log($event.detail); show = ($event.detail.itemId === {{ $itemId }})"
+    x-on:close-notes.window="show = false"
+    style="z-index: -50; display:none;"
+    x-transition
+    >
+    <div class="order-modal-background" x-on:click="show = false"></div>
+    <div class="order-modal">
+        <form action="" wire:submit="addNotes({{$itemId}})">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Notes {{ $itemId }}
+                </div>
+                <div>
+                    <button style="background: none; border:none;" x-on:click="show = false">
+                        <x-maki-cross style="height:20px;" />
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <textarea name="itemnotes" id="itemnotes" cols="40" rows="5" wire:model="notes"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button" type="submit" style="background-color:#677cf3; color:#242424;">Add Notes</button>
+                <button class="modal-button close" x-on:click="show = false">Close</button>
+            </div>
+        </form>
+    </div>
 </div>

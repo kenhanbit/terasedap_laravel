@@ -15,11 +15,11 @@
             <img src="images/terasedap_logo.png" alt="" />
         </div>
         <ul>
-            <li><a href="#">Menu</a></li>
-            <li><a href="{{ route('orders.history') }}">Orders</a></li>
+            <li><a href="{{ route('food-items')}}">Menu</a></li>
+            <li><a href="{{ route('admin.history') }}">Orders History</a></li>
             <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            {{-- {{ Auth::user()->name }} --}}
                         </a>
                         <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('logout') }}"
