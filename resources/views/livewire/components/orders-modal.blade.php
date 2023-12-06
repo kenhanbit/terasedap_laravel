@@ -38,7 +38,7 @@ x-transition
                 @foreach ($detail->items as $item)
                     <div class="item-detail">
                         <div>
-                            <div style="margin-right:40px; display:flex;margin-bottom:4px;">
+                            <div style="margin-right:40px; display:flex;">
                                 <div style="margin-right:10px;">
                                     {{$item->menu_name}}
                                 </div>
@@ -46,8 +46,8 @@ x-transition
                                     x {{$item->quantity}}
                                 </div>
                             </div>
-                            <div style="display: flex;overflow-wrap: break-word; max-width:200px; margin-left:10px">
-                                {{ $item->notes}}
+                            <div style="display: flex;overflow-wrap: break-word; max-width:200px; margin-left:10px; margin-bottom:8px;">
+                                {{ nl2br($item->notes) }}
                             </div>
                         </div>
                         <div>

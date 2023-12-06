@@ -54,7 +54,7 @@
                             {{ $item->menu_name}}
                         </div>
                         <div>
-                            {{ $item->notes }}
+                            <?= nl2br($item->notes) ?>
                         </div>
                         <div style="display: flex; justify-content: space-between">
                             <div>

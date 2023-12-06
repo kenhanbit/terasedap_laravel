@@ -96,6 +96,8 @@ a {
 
 .menu-image {
     width: 35%;
+    background-color: #dddddd;
+    border-radius: 8px;
 }
 
 .menu-image img {

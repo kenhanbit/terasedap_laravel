@@ -77,7 +77,7 @@ Route::get('/fooditem/{id}/description', [FoodItemController::class, 'showDescri
 
 Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
 
-Route::get('/download_receipt/{ordercode}', [CartController::class, 'downloadReceipt'])->name('downloadReceipt');
+Route::get('/receipt/{ordercode}', [CartController::class, 'downloadReceipt'])->name('downloadReceipt');
 
 Route::get('/admin/category', Category::class)->name('admin.category')->middleware('auth', 'admin');
 Route::get('admin/orders', Order::class)->name('admin.orders')->middleware('auth', 'admin');

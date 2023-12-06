@@ -21,6 +21,13 @@ class CategoryList extends Component
 
     public function delete(Category $delete)
     {
+        if (!isset($delete->items)) {
+            $delete->delete();
+            return redirect()->route('admin.category')->with('success', 'Kategori berhasil dihapus.');
+        } else {
+            $message = 'Tidak dapat menghapus kategori karena masih ada item makanan terkait. Silakan hapus item makanan terkait terlebih dahulu.';
+            return redirect()->route('admin.category')->with('error', 'Tidak dapat menghapus kategori yang memiliki item makanan terkait.');
+        }
         $delete->delete();
     }
 

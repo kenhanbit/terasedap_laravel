@@ -12,7 +12,7 @@
                 <img src="{{asset('images/terasedap_logo.png')}}" style="width: 200px" alt="">
             </div>
             <div>
-                <div>Order Date: {{ $order->updated_at}}</div>
+                <div>Order Date: {{ $order->created_at}}</div>
                 <div>
                     Order Number: {{ $order->order_code }}
                 </div>

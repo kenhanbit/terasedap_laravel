@@ -16,6 +16,11 @@
         }
     </style>
     <div class="container admin">
+        @if(session('error'))
+            <div style="display:flex; margin-top: 12px; flex-wrap:wrap; background-color: #fd3030; color:#ffa2a2; width:max-content; padding: 12px; border-radius: 12px;">
+                {{ session('error') }}
+            </div>
+        @endif
         <div style="display: flex; justify-content: space-between">
             <h2>
                 Category
