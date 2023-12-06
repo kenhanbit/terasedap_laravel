@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\FoodItem;
 use App\Models\OrderHistory;
 use App\Models\OrderItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -21,7 +22,7 @@ class CartController extends Controller
         if (!Session::has('order_code')) {
             return redirect()->route('scan_qr');
         }
-        $cart = Cart::where('order_code', Session::get('order_code'))->first();
+        $cart = Cart::where('order_code', Session::get('order_code'))->where('status', 'pending')->first();
         $total = $cart->total_price;
 
         foreach ($cart->items as $item) {
@@ -70,6 +71,13 @@ class CartController extends Controller
         return redirect()->route('thank_you');
     }
 
+    public function downloadReceipt($ordercode)
+    {
+        $order = Order::where('order_code', $ordercode)->first();
+        // $pdf = Pdf::loadView('receipt', ['order' => $order]);
+        // return $pdf->download('terasedap_receipt.pdf');
+        return view('receipt', ['order' => $order]);
+    }
 
 
     public function showOrder()

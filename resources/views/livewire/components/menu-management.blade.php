@@ -36,25 +36,34 @@
 <div id="menu-manager">
     <ul id="category-list">
         @foreach ($categories as $category)
-        <li  class="category-list-item">
+        <li class="category-list-item" onclick="scrollToSection('{{$category->name}}')">
             <a>{{$category->name}}</a>
         </li>
         @endforeach
     </ul>
     <div id="admin-menu">
         @foreach ($categories as $category)
-            <h3>{{$category->name}}</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="scroll-target category-section" id="{{$category->name}}">
+                <h2>{{ $category->name}}</h2>
+                <div class="menu-section">
+                    @foreach ($category->items as $food)
+                        <livewire:Components.AdminMenu :detail="$food" wire:key="{{$food->id}}" />
+                    @endforeach
+                </div>
+            </div>
         @endforeach
     </div>
     
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+    
+            if (section) {
+                section.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+        }
+        </script>
 </div>
 

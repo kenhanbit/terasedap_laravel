@@ -19,9 +19,9 @@ class DeleteModal extends Component
 
     public function deleteOrder(Order $order)
     {
-        $validated = request()->validate([
-            'cancel_reason' => 'required'
-        ]);
+        // $validated = request()->validate([
+        //     'cancel_reason' => 'required'
+        // ]);
 
         DB::transaction(function () use ($order) {
             $canceled = new CanceledOrder();
@@ -40,6 +40,6 @@ class DeleteModal extends Component
         $this->dispatch('close-delete-modal');
         $this->dispatch('close-modal');
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.orders');
     }
 }

@@ -10,17 +10,17 @@
     <div class="thankyou-container">
         <center>
             <div class="logo">
-                <a href="{{ route('food-items') }}">
+                <a href="{{ route('table', Session::get('table')) }}">
                     <img src="{{ asset('images/terasedap_logo.png') }}" alt="logo" />
                 </a>
             </div>
         </center>
         <div class="thankyou">
             <p>Thank You For Ordering!</p>
-            <a href="">Download Receipt</a>
+            <a href="{{ route('downloadReceipt', Session::get('order_code'))}}">Download Receipt</a>
         </div>
         <div class="back-to-home">
-            <a href="">Back to Home</a>
+            <a href="{{ route('table', Session::get('table')) }}">Back to Home</a>
         </div>
     </div>
 </body>

@@ -10,6 +10,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Livewire\Category;
 use App\Livewire\Menu;
@@ -30,7 +31,7 @@ use App\Livewire\OrderHistory;
 Route::get('/generate-url/{table}', function ($table) {
     $url = URL::signedRoute('check-route-validation', ['table' => $table], now()->addHour());
     return redirect($url);
-});
+})->name('table');
 
 Route::get('/validation/{table}', function ($table) {
     Session::put('table', $table);
@@ -54,24 +55,15 @@ Route::get('/validation/{table}', function ($table) {
     return redirect()->route('food-items');
 })->name('check-route-validation')->middleware('signed');
 
-// Route::get('/menu', [MenuController::class])->name('food-items')->middleware('signed:relative');
-
 Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 
-Route::controller(LoginRegisterController::class)->group(function () {
-    Route::get('/register', 'register')->name('register');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/login', 'login')->name('login');
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
-    // Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::post('/logout', 'logout')->name('logout');
-});
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/authentication', [AuthController::class, 'authentication'])->name('authentication');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register/signup', [AuthController::class, 'store'])->name('register.store');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route::resource('categories', CategoryController::class);
-// Route::get('/menu', [MenuController::class, 'showMenu']);
-
-// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.view');
 
 Route::get('/thankyou', function () {
     return view('thank_you');
@@ -81,28 +73,29 @@ Route::get('/error', function () {
     return view('scan_qr');
 })->name('scan_qr');
 
-Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
-
 Route::get('/fooditem/{id}/description', [FoodItemController::class, 'showDescription'])->name('fooditem.description');
 
-Route::get('/admin/category', Category::class)->name('admin.category');
-Route::get('admin/orders', Order::class)->name('admin.orders');
-Route::get('admin/menu', Menu::class)->name('admin.menu');
-Route::get('admin/history', OrderHistory::class)->name('admin.history');
+Route::post('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirmOrder');
+
+Route::get('/receipt/{ordercode}', [CartController::class, 'downloadReceipt'])->name('downloadReceipt');
+
+Route::get('/admin/category', Category::class)->name('admin.category')->middleware('auth', 'admin');
+Route::get('admin/orders', Order::class)->name('admin.orders')->middleware('auth', 'admin');
+Route::get('admin/menu', Menu::class)->name('admin.menu')->middleware('auth', 'admin');
+Route::get('admin/history', OrderHistory::class)->name('admin.history')->middleware('auth', 'admin');
 
 
-Route::get('/add-food-item', [FoodItemController::class, 'createForm']);
-Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView']);
-Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('fooditem.store');
+Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView'])->middleware('auth', 'admin')->name('add-menu');
+Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('fooditem.store')->middleware('auth', 'admin');
 
-Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food-item.edit');
-Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update');
+Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food-item.edit')->middleware('auth', 'admin');
+Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update')->middleware('auth', 'admin');
 
 
-Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->name('food_items.destroy');
+Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->name('food_items.destroy')->middleware('auth', 'admin');
 
 // Route for displaying the edit form for a food item
-Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food_items.editForm');
+Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food_items.editForm')->middleware('auth', 'admin');
 
 // Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
 
@@ -110,4 +103,4 @@ Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])-
 // Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
 
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+// Route::get('/login', [AuthController::class, 'login'])->name('login');
